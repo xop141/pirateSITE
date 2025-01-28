@@ -1,50 +1,15 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
-import logo from "../components/img/logo.svg";
-import glass from "../components/img/glass.svg"
-import moon from "../components/img/moon.svg";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
+import Header from "../components/Header"
+import Footer from "../components/Footer";
+import {ThemeProvider} from "../components/theme-provider";
 
 
 
 
 
-
-
-
-const Header = ()=>{
-  return(
-    <div className="w-screen h-fit bg-green-300 flex justify-center p-[12px]">
-      <div className="w-fit h-fit bg-gray-300 flex flex-row items-center gap-[300px]">
-        <div className="flex flex-row gap-[8px]">
-        <Image src={logo} alt="logo"/>
-        <p>Movie Z</p>
-        </div>
-        <div className="flex flex-row gap-[12px]">
-        <Button variant="outline">
-        <ChevronRight />
-        Genre
-        </Button>
-        <Input />
-        </div>
-       
-        <Button variant="outline" >
-   <Image src={moon} alt="moon" className="w-[16px] h-[16px]"   />
-    </Button>
-    
-   
-
-        
-        
-
-        </div>
-    </div>
-  )
-}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,8 +36,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+           <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         <Header/>
         {children}
+      
+        <Footer/>
+        </ThemeProvider>
       </body>
     </html>
   );
