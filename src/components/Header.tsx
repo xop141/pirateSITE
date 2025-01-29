@@ -18,6 +18,8 @@ const Header = () => {
 
 const toggleTheme = () => {
   setTheme(theme === 'light' ? 'dark' : 'light')
+ 
+  
 }
   return (
     <div className='w-screen h-fit flex justify-between p-[20px]'>

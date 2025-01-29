@@ -1,31 +1,36 @@
 "use client"
-import Image from "next/image";
-import { Button } from "@/components/ui/button" 
-import axios from "axios";
-import { useEffect } from "react";
-export default function Home() {
-  const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
-  const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
+import { useEffect, useState } from "react";
+import { Import } from "lucide-react";
+import Popular from "../components/Popular"
+import NowPlaying from "@/components/NowPlaying";
+import TopRated from "@/components/TopRated";
+import UpComing from "@/components/UpComing"
+import MovieCard from "@/components/MovieCard"
 
-  const getDATA = async () =>{
-    try{
-      const response =await axios.get('${TMDB_BASE_URL}/movie/upcoming?language=en-US&page=1',{headers:{
-        Authorization: 'Bearer ${TMDB_API_TOKEN}'
-      },
-    })
-      console.log(response);
-      
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
-  useEffect(()=>{
-    getDATA()
-  },[])
+export default function Home() {
+  const [data, setData] = useState(null); 
+  const handleDataFromChild = (dataFromChild) => {
+    setData(dataFromChild); 
+  };
+
   return (
-  <div className="w-screen h-screen flex items-center justify-center">
-asd
-  </div>
+    <div className="flex flex-col w-screen h-fit px-[20px] gap-y-[32px]">
+      
+      <MovieCard data={data}/> 
+<Popular sendData={handleDataFromChild}/>
+<TopRated/>
+<UpComing/>
+<NowPlaying/>
+
+
+
+  
+
+
+      
+ 
+        
+      </div>
+  
   );
 }
