@@ -19,7 +19,7 @@ import {
 
 const Page = () => {
    const params = useParams();
-   const typo = params.type;
+   const typo = params.id;
 
   const url = 'https://image.tmdb.org/t/p/w500'
   const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
