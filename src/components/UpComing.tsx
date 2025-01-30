@@ -4,13 +4,18 @@ import axios from "axios";
 import Image from "next/image";
 import { Star } from 'lucide-react';
 import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
+import { Movie } from '@/types/movie-type';
 
 
 const UpComing = () => {
+
+ 
+  
     const url = 'https://image.tmdb.org/t/p/w500'
     const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
     const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
-  const [popular, setPopular] = useState([])
+  const [popular, setPopular] = useState<Movie[]>([])
     const getDATA = async () => {
       try {
         const response = await axios.get(`${TMDB_BASE_URL}//movie/upcoming?language=en-US&page=1`, {
@@ -28,6 +33,11 @@ const UpComing = () => {
     useEffect(() => {
       getDATA()
     }, [])
+  const router = useRouter();
+    const handleMovieClick = (id:Number) => {
+  
+      router.push(`/detail/${id}`);
+    };
   return (
     <div className="w-full h-fit flex flex-col items-center gap-y-[32px]">
 
@@ -39,7 +49,7 @@ const UpComing = () => {
 
       {popular.slice(0,10).map((movie) => {
         return (
-          <div key={movie.title} className="w-[157.5px] bg-cardWhite flex flex-col rounded-[8px] ">
+          <div key={movie.title} className="w-[157.5px] bg-cardWhite flex flex-col rounded-[8px]" onClick={()=>handleMovieClick(movie.id)}>
             <Image
               src={`${url}${movie.poster_path}`}
                width={157.5}
