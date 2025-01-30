@@ -38,16 +38,15 @@ const Popular = () => {
     router.push(`/detail/${id}`);
   };
 
-  const Jump=()=>{
-    console.log(1);
-    
+  const Jump=(type:string)=>{
+    router.push(`/More/${type}`);
   }
   return (
     <div className="w-full h-fit flex flex-col items-center gap-y-[32px]">
 
       <div className='flex justify-between items-center  w-[100%]'>
         <p className='font-[600] text-white'>Popular</p>
-        <Button id='but' className='font-[600]' onClick={Jump}>see more</Button>
+        <Button id='but' className='font-[600]' onClick={()=>Jump("popular")}>see more</Button>
       </div>
       <div className="w-full h-fit flex flex-row justify-start gap-[20px] lg:gap-[32px] flex-wrap">
       

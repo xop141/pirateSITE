@@ -35,7 +35,8 @@ const Page = () => {
                 },
             });
             setCrew(response.data.crew);
-            console.log(response.data.crew);
+            
+            
         } catch (err) {
             console.log(err);
         }

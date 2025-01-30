@@ -6,6 +6,7 @@ import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { Movie } from '@/types/movie-type';
+import { useParams } from 'next/navigation';
 import {
   Pagination,
   PaginationContent,
@@ -17,6 +18,9 @@ import {
 } from "@/components/ui/pagination"
 
 const Page = () => {
+   const params = useParams();
+   const typo = params.type;
+
   const url = 'https://image.tmdb.org/t/p/w500'
   const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
   const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
@@ -26,7 +30,7 @@ const Page = () => {
 
   const getDATA = async () => {
     try {
-      const response = await axios.get(`${TMDB_BASE_URL}/movie/popular?language=en-US&page=1`, {
+      const response = await axios.get(`${TMDB_BASE_URL}/movie/${typo}?language=en-US&page=1`, {
         headers: {
           Authorization: `Bearer ${TMDB_API_TOKEN}`
         }
@@ -48,20 +52,22 @@ const Page = () => {
 
   const add = () => {
     setCurrentPage((prev) => prev + 1);
+   
+    
   };
 
   const dec = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1)); // Prevent going below page 1
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
-  // Calculate the correct slice range based on the current page
+
   const startIdx = (currentPage - 1) * 10;
   const endIdx = currentPage * 10;
 
   return (
     <div className="w-full h-fit flex flex-col items-center gap-y-[32px] ">
       <div className='flex justify-between items-center w-[100%] px-[20px]'>
-        <p className='font-[600] text-white text-[24px]'>Popular</p>
+        <p className='font-[600] text-white text-[24px]'>{typo}</p>
       </div>
       <div className="w-full h-fit flex flex-row justify-start gap-[20px] lg:gap-[32px] flex-wrap px-[20px]">
         {popular.slice(startIdx, endIdx).map((movie) => {
