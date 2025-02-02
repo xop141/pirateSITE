@@ -36,10 +36,19 @@ const NowPlaying = () => {
         getDATA()
     }, [])
      const router = useRouter();
+     const jumpTOtrailer=(id)=>{
+
+       router.push(`/Trailer/${id}`);
+      
+      
+        
+    }
       const handleMovieClick = (id:Number) => {
     
         router.push(`/detail/${id}`);
       };
+
+    
 
     return (
         <div className="w-full h-fit flex flex-col items-center  ">
@@ -49,7 +58,9 @@ const NowPlaying = () => {
                     {popular.slice(0, 5).map((movie) => {
                         return (
 
-                            <CarouselItem key={movie.id} id={movie.title} onClick={() =>handleMovieClick(movie.id)} > <Image
+                            <CarouselItem key={movie.id} id={movie.title} onClick={() =>handleMovieClick(movie.id)} > 
+                            
+                            <Image
                                 src={`${url}${movie.backdrop_path}`}
                                 width={375}
                                 height={246}
@@ -70,7 +81,7 @@ const NowPlaying = () => {
                                     </div>
 
                                     {movie.overview}
-                                    <Button className='w-[145px] h-[40px] flex items-center'>
+                                    <Button className='w-[145px] h-[40px] flex items-center ' onClick={()=>jumpTOtrailer(movie.id)}>
                                         <Play />
                                         Watch trailer</Button>
                                 </div>

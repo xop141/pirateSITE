@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import { Star } from 'lucide-react';
+import { Star, Play} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { Movie, CrewMember } from '@/types/movie-type';
 import MoreLike from '@/components/MoreLike';
+import { useRouter } from 'next/navigation';
+
+
 const Page = () => {
     const params = useParams();
     const movieId = params.id;
@@ -47,8 +50,13 @@ const Page = () => {
             getCREW();
         }
     }, [movieId]);
+    const router = useRouter();
+    const jumpTOtrailer=(id:number)=>{
+        router.push(`/Trailer/${id}`);
+    }
     return (
         <div>
+           
             {movie ? (
                 <div className='flex flex-col gap-[20px] px-[20px]'>
                     <div className='flex justify-between'>
@@ -66,13 +74,25 @@ const Page = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='relative'>
+                 
+                  
+
+
+
+             
+                 
+                   <Button className='absolute bottom-0' onClick={()=>jumpTOtrailer(movie.id)}>
+                        <Play/>
+                        <p>Play trailer</p>
+                        </Button> 
                     <Image
                         src={`${url}${movie.backdrop_path}`}
                         width={375}
                         height={211}
                         alt={movie.title}
                     />
-
+</div>
                     <div className='flex justify-between'>
                         <div className=''>
                             <Image
@@ -128,7 +148,7 @@ const Page = () => {
                             {crew
                                 ?.filter(
                                     (member) =>
-                                        member.popularity > 7 && member.known_for_department === "Acting"
+                                        member.popularity > 5 && member.known_for_department === "Acting"
                                 )
                                 .map((member) => (
                                     <div key={member.id}>{member.name}</div>
