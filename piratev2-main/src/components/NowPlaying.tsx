@@ -51,7 +51,6 @@ const NowPlaying = () => {
     
 
     return (
-      
         <div className="w-full h-fit flex flex-col items-center ">
 
             <Carousel className='w-[100%] '>
@@ -72,7 +71,7 @@ const NowPlaying = () => {
 </div>
 
 
-<div className='flex flex-col py-[20px] gap-[16px] lg:w-[40%] md:w-[100%] sm:w-[100%] lg:absolute lg:bottom-[10%] '>
+                                <div className='flex flex-col py-[20px] gap-[16px] lg:w-[40%] md:w-[100%] sm:w-[100%] lg:absolute lg:bottom-[10%] '>
                                     <div className='flex justify-between '>
                                         <div >
                                             <h1>Now Playing:</h1>
@@ -87,13 +86,13 @@ const NowPlaying = () => {
 <div className='w-[100%] h-fit'>
 {movie.overview}
 </div>
-                  
+                             
                                     <Button className='w-[145px] h-[40px] flex items-center ' onClick={()=>jumpTOtrailer(movie.id)}>
                                         <Play />
                                         Watch trailer</Button>
                                 </div>
 
-                               
+
                             </CarouselItem>
 
 
@@ -106,8 +105,8 @@ const NowPlaying = () => {
                 <CarouselNext />
             </Carousel>
 
-            </div>
-      
+
+        </div>
     )
 }
 export default NowPlaying

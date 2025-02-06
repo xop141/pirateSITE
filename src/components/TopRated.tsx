@@ -38,14 +38,14 @@ const TopRated = () => {
         router.push(`/More/${type}`);
       }
   return (
-    <div className="w-full h-fit flex flex-col items-center gap-y-[32px]">
+    <div className="w-full h-fit flex flex-col items-center gap-y-[32px] ">
 
-    <div className='flex justify-between items-center  w-[100%]'>
+    <div className='flex justify-between items-center  w-[100%] lg:w-[80%] '>
         <p className='font-[600] text-white'>Top Rated</p>
         <Button id='but' className='font-[600]' onClick={()=>Jump("top_rated")}>see more</Button>
     </div>
-    <div className="w-full h-fit flex flex-row justify-start gap-[20px] lg:gap-[32px] flex-wrap">
-
+    <div className="w-full h-fit flex justify-center">
+    <div className='flex lg:w-[80%] lg:justify-start gap-[20px] flex-row flex-wrap md:justify-start lg:gap-[32px]'>
       {popular.slice(0,10).map((movie) => {
         return (
           <div key={movie.title} className="w-[157.5px] bg-cardWhite flex flex-col rounded-[8px]" onClick={()=>handleMovieClick(movie.id)}>
@@ -64,6 +64,7 @@ const TopRated = () => {
           </div>
         );
       })}
+      </div>
     </div>
   </div>
   )

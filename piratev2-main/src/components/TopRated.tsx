@@ -4,27 +4,23 @@ import axios from "axios";
 import Image from "next/image";
 import { Star } from 'lucide-react';
 import { Button } from './ui/button';
-import { useRouter } from 'next/navigation';
 import { Movie } from '@/types/movie-type';
+import { useRouter } from 'next/navigation';
 
-
-const UpComing = () => {
-
- 
-  
+const TopRated = () => {
     const url = 'https://image.tmdb.org/t/p/w500'
     const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
     const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
   const [popular, setPopular] = useState<Movie[]>([])
     const getDATA = async () => {
       try {
-        const response = await axios.get(`${TMDB_BASE_URL}//movie/upcoming?language=en-US&page=1`, {
+        const response = await axios.get(`${TMDB_BASE_URL}//movie/top_rated?language=en-US&page=1`, {
           headers: {
             Authorization: `Bearer ${TMDB_API_TOKEN}`
           }
         })
         setPopular(response.data.results);
-       
+    
       }
       catch (err) {
         console.log(err);
@@ -33,20 +29,20 @@ const UpComing = () => {
     useEffect(() => {
       getDATA()
     }, [])
-  const router = useRouter();
-    const handleMovieClick = (id:Number) => {
-  
-      router.push(`/detail/${id}`);
-    };
-    const Jump=(type:string)=>{
-      router.push(`/More/${type}`);
-    }
+     const router = useRouter();
+      const handleMovieClick = (id:Number) => {
+    
+        router.push(`/detail/${id}`);
+      };
+      const Jump=(type:string)=>{
+        router.push(`/More/${type}`);
+      }
   return (
-    <div className="w-full h-fit flex flex-col items-center gap-y-[32px]">
+    <div className="w-full h-fit flex flex-col gap-y-[32px] ">
 
-    <div className='flex justify-between items-center  w-[100%] lg:w-[80%]'>
-        <p className='font-[600] text-white'>Up Coming</p>
-        <Button id='but' className='font-[600]' onClick={()=>Jump("upcoming")}>see more</Button>
+    <div className='flex justify-between w-[100%]'>
+        <p className='font-[600] text-white'>Top Rated</p>
+        <Button id='but' className='font-[600]' onClick={()=>Jump("top_rated")}>see more</Button>
     </div>
     <div className="w-full h-fit flex justify-center">
     <div className='flex lg:w-[80%] lg:justify-start gap-[20px] flex-row flex-wrap md:justify-start lg:gap-[32px]'>
@@ -66,7 +62,6 @@ const UpComing = () => {
               <h1 className='w-full h-[56px]'> {movie.title}</h1>
             </div>
           </div>
-          
         );
       })}
       </div>
@@ -74,4 +69,4 @@ const UpComing = () => {
   </div>
   )
 }
-export default UpComing
+export default TopRated

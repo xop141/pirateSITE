@@ -39,12 +39,11 @@ const showBAR=()=>{
       <div
   className={`${
     isBAR === "hidden" ? "flex" : "hidden"
-  } ${theme === "dark" ? "bg-background " : "bg-white"} justify-between absolute top-0 left-0 w-full h-full items-center z-100`}
+  } ${theme === "dark" ? "bg-background " : "bg-white"} justify-between absolute top-0 left-0 w-full h-full items-center z-100 `}
 >
-          <div className='bg-gray-300'>
-      
-  <Genre />
-  
+          <div>
+  <Genre/>
+
 
           </div>
           <SearchButton/>
@@ -58,9 +57,7 @@ const showBAR=()=>{
         <Film />
         <p className='text-indigo-700 font-[700]'>MovieZ</p>
       </div>
-      <div className='hidden md:flex md:gap-[12px] '>
-        <Genre/>
-        <SearchButton/></div>
+      <div className='hidden md:flex'><SearchButton/></div>
       <div  className='flex gap-[12px]'>
       
      
