@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const Page = () => {
   const { push } = useRouter();
-  const url = "https://image.tmdb.org/t/p/w500";
+  const url = "https://image.tmdb.org/t/p/original";
   const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
   const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
   const searchParams = useSearchParams();
@@ -24,7 +24,7 @@ const Page = () => {
   const testid = params.id;
   const router = useRouter();
 
-  // Fetch genres on initial load
+  
   const getDATA = async () => {
     setLoading(true);
     setError(false);
@@ -92,11 +92,11 @@ const Page = () => {
         <div>
           {loading ? (
             <div>
-              <Skeleton className="w-[200px] h-[30px] rounded" />
+              <Skeleton className="w-[200px] h-[30px] rounded mt-2" />
               <Skeleton className="w-[150px] h-[20px] rounded mt-2" />
             </div>
           ) : error ? (
-            <div className="text-red-500">Failed to load data. Please try again later.</div>
+            <div className="text-red-500">try again later.</div>
           ) : (
             <div>
               <h1 className="text-[24px] font-[600]">Search filter</h1>
@@ -129,7 +129,7 @@ const Page = () => {
                 />
               ))
             ) : error ? (
-              <div className="text-red-500">Failed to load movies. Please try again later.</div>
+              <div className="text-red-500">try again later.</div>
             ) : (
               movies.map((movie) => (
                 <div

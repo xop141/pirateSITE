@@ -48,8 +48,8 @@ const Page = () => {
 
     return (
         
-        <div className='w-full h-full px-[20px] bg-green-300'>
-            <h1>movies found {popular.length}</h1>
+        <div className='w-full h-full px-[20px]'>
+            <h1>movies found{popular.length}</h1>
             <div className='flex flex-row gap-[20px] flex-wrap bg-black'>
                 {popular && popular.length > 0 ? (
                     popular.map(movie => (

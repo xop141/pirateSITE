@@ -50,15 +50,15 @@ const Genre = () => {
   return (
     // <Badge className="block w-full md:w-auto">
       <DropdownMenu >
-        <DropdownMenuTrigger className="h-9 px-4 py-2 bg-primary text-primary-foreground shadow hover:bg-primary/90 flex items-center gap-2 rounded-md">
+        <DropdownMenuTrigger className="h-9 px-4 py-2  flex items-center gap-2 rounded-md">
           
           <ChevronDown />
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="bg-gray-300 w-[90%] max-w-sm md:max-w-lg min-h-[200px] md:min-h-[300px] h-auto p-4 rounded-md">
+        <DropdownMenuContent className=" w-[90%] max-w-sm md:max-w-lg min-h-[200px] md:min-h-[300px] h-auto p-4 rounded-md">
           <DropdownMenuLabel className="text-lg font-bold">Genres</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuLabel className="text-sm mb-2">
+          <DropdownMenuLabel className="text-sm ">
             See lists of movies by genre
           </DropdownMenuLabel>
           <div className="flex flex-wrap gap-2">
@@ -66,9 +66,9 @@ const Genre = () => {
               <DropdownMenuItem
                 key={genre.name}
                 onClick={() => jump(genre.id, genre.name)}
-                className="p-2 hover:bg-gray-400 rounded-md cursor-pointer"
+                className="p-2 rounded-md cursor-pointer"
               >
-                <Badge className="bg-blue-500 text-white">{genre.name}</Badge>
+                <Badge className="bg-gray-600 text-white">{genre.name}</Badge>
               </DropdownMenuItem>
             ))}
           </div>

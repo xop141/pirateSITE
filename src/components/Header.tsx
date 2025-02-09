@@ -1,102 +1,78 @@
-"use client"
-import React, { useState } from 'react'
-import { Film } from 'lucide-react';
-import { Moon, Sun, ChevronDown, Search } from "lucide-react"
-import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
-import { Input } from "../components/ui/input"
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import SearchButton from './SearchButton';
-import { X } from 'lucide-react';
-import Genre from '@/components/Genre'
-
+"use client";
+import React, { useState } from "react";
+import { Film, Moon, Sun, ChevronDown, Search, X } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
+import Genre from "@/components/Genre";
+import SearchButton from "./SearchButton";
 
 const Header = () => {
   const router = useRouter();
+  const { setTheme, theme } = useTheme();
+  const [isBAR, setIsBAR] = useState("hidden");
+
   const JumpHOME = () => {
     router.push(`/`);
   };
-  const { setTheme, theme } = useTheme()
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
-  const [isBAR, setIsBAR] = useState("true")
-const showBAR=()=>{
-  if (isBAR === "hidden") {
-    setIsBAR("flex")
-  } else {
-    setIsBAR("hidden")
-  }
-  
-}
 
-// `${isBAR === "hidden" ? "hidden" : "flex"} w-full h-fit justify-between relative `
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  const showBAR = () => {
+    setIsBAR(isBAR === "hidden" ? "flex" : "hidden");
+  };
 
   return (
-    <div className='w-screen h-fit p-[20px] flex justify-center'>
-      <div className='flex w-full h-fit justify-between relative items-center lg:w-[80%]'>
-      <div
-  className={`${
-    isBAR === "hidden" ? "flex" : "hidden"
-  } ${theme === "dark" ? "bg-background " : "bg-white"} justify-between absolute top-0 left-0 w-full h-full items-center z-100`}
->
-          <div className='bg-gray-300'>
+    <div className="w-full h-fit p-5 flex justify-center bg-gray-100 dark:bg-gray-900">
+      <div className="flex w-full h-fit justify-between items-center lg:w-[80%] relative">
       
-  <Genre />
-  
-
-          </div>
-          <SearchButton/>
-<X onClick={showBAR}/>
-
-
-         </div>
-        
-         
-      <div className='flex gap-[8px] items-center w-fit' onClick={() => JumpHOME()} >
-        <Film />
-        <p className='text-indigo-700 font-[700]'>MovieZ</p>
-      </div>
-      <div className='hidden md:flex md:gap-[12px] '>
-        <Genre/>
-        <SearchButton/></div>
-      <div  className='flex gap-[12px]'>
-      
-     
-            
-              <div
-          style={{
-            borderRadius: 'var(--radius-rounded-md, 10px)',
-            border: '1px solid var(--border-border-input, #E4E4E7)',
-            boxShadow: '0px 1px 2px 0px rgba(0, 0, 0, 0.05)'
-          }}
-            className='p-4 flex md:hidden'
-            onClick={showBAR}
-             ><Search /></div>
-          
         <div
-          style={{
-            borderRadius: 'var(--radius-rounded-md, 10px)',
-            border: '1px solid var(--border-border-input, #E4E4E7)',
-            boxShadow: '0px 1px 2px 0px rgba(0, 0, 0, 0.05)'
-          }}
-          className="p-4 "
-          onClick={toggleTheme}
+          className={`${
+            isBAR === "hidden" ? "hidden" : "flex"
+          } ${theme === "dark" ? "bg-gray-900" : "bg-white"} 
+          absolute top-0 left-0 w-full h-full items-center z-50 p-5`}
         >
-          {theme === 'dark' ? (
-            <Sun />
-          ) : (
-            <Moon />
-          )}
+          <div className="bg-gray-300 p-4 rounded-md w-full">
+            <Genre />
+          </div>
+          <SearchButton />
+          <X onClick={showBAR} className="cursor-pointer" />
         </div>
-        
-      </div>
-   
-      </div>
-      </div>
-    
-  )
-}
 
-export default Header
+        {/* Logo */}
+        <div
+          className="flex gap-2 items-center cursor-pointer"
+          onClick={JumpHOME}
+        >
+          <Film />
+          <p className="text-indigo-700 font-bold">MovieZ</p>
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex md:gap-3">
+          <Genre />
+          <SearchButton />
+        </div>
+
+        {/* Theme and Mobile Menu */}
+        <div className="flex gap-3">
+          <div
+            className="p-3 md:hidden border border-gray-300 shadow-sm rounded-md cursor-pointer"
+            onClick={showBAR}
+          >
+            <Search />
+          </div>
+          <div
+            className="p-3 border border-gray-300 shadow-sm rounded-md cursor-pointer"
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? <Sun /> : <Moon />}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Header;
