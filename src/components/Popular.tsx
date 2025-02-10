@@ -5,12 +5,13 @@ import { Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Movie } from "@/types/movie-type";
+import { useTheme } from "next-themes";
 
 const Popular = () => {
   const url = "https://image.tmdb.org/t/p/w500";
   const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
   const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
-
+const { setTheme, theme } = useTheme();
   const [popular, setPopular] = useState<Movie[]>([]);
   const getDATA = async () => {
     try {
@@ -45,20 +46,20 @@ const Popular = () => {
   return (
     <div className="w-full h-fit flex flex-col items-center gap-y-8 font-semibold text-lg overflow-hidden">
    
-      <div className="flex justify-between items-center w-full max-w-5xl px-4">
-        <p className="font-bold text-white">Popular</p>
+      <div className="flex justify-between items-center w-full max-w-5xl">
+        <p className={`${theme === "dark" ? "text-white" : "text-black"}`}>Popular</p>
         <Button className="font-bold" onClick={() => Jump("popular")}>
           See More
         </Button>
       </div>
 
     
-      <div className="w-full flex justify-center px-4">
-        <div className="flex flex-wrap gap-5 lg:gap-8 max-w-5xl">
+      <div className="w-full flex justify-center ">
+        <div className="flex flex-wrap gap-5 max-w-5xl">
           {popular.slice(0, 10).map((movie) => (
             <div
               key={movie.id}
-              className="w-[157.5px] lg:w-[230px] flex flex-col rounded-lg shadow bg-gray-900  cursor-pointer"
+              className={`w-[157.5px] lg:w-[230px] flex flex-col bg-black rounded-lg shadow ${theme === "dark" ? "bg-gray-900" : "bg-cardWhite"}  cursor-pointer`}
               onClick={() => handleMovieClick(movie.id)}
             >
               <div className="relative">

@@ -5,12 +5,12 @@ import { Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { Movie } from "@/types/movie-type";
-
+import { useTheme } from "next-themes";
 const UpComing = () => {
   const url = "https://image.tmdb.org/t/p/w500";
   const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
   const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
-
+  const { setTheme, theme } = useTheme();
   const [upcoming, setUpcoming] = useState<Movie[]>([]);
 
   const getDATA = async () => {
@@ -47,19 +47,19 @@ const UpComing = () => {
     <div className="w-full h-fit flex flex-col items-center gap-y-8 font-semibold text-lg overflow-hidden">
       {/* Header */}
       <div className="flex justify-between items-center w-full max-w-5xl px-4">
-        <p className="font-bold text-white">Upcoming</p>
+      <p className={`${theme === "dark" ? "text-white" : "text-black"}`}>Top Rated</p>
         <Button className="font-bold" onClick={() => Jump("upcoming")}>
           See More
         </Button>
       </div>
 
       {/* Movies Grid */}
-      <div className="w-full flex justify-center px-4">
+      <div className="w-full flex justify-center">
         <div className="flex flex-wrap gap-5 lg:gap-8 max-w-5xl">
           {upcoming.slice(0, 10).map((movie) => (
             <div
               key={movie.id}
-              className="w-[157.5px] lg:w-[230px] bg-gray-900 flex flex-col rounded-lg shadow-md cursor-pointer"
+              className={`w-[157.5px] lg:w-[230px] flex flex-col rounded-lg shadow ${theme === "dark" ? "bg-gray-900" : "bg-cardWhite"}  cursor-pointer`}
               onClick={() => handleMovieClick(movie.id)}
             >
               <div className="relative">

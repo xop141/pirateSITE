@@ -46,7 +46,7 @@ const Header = () => {
           onClick={JumpHOME}
         >
           <Film />
-          <p className="text-indigo-700 font-bold">MovieZ</p>
+        <p className={`${theme === "dark" ? "bg-gray-900" : "bg-white"} text-bold font-[600]`} >Movie Z</p>
         </div>
 
         {/* Desktop Menu */}
